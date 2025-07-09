@@ -113,6 +113,7 @@ impl<'a> Parser<'a> {
                 Token::Slash => Expr::Div(Box::new(node.clone()), Box::new(rhs)),
                 _ => unreachable!("Unreachable"),
             };
+            self.expect_binary_operator()?;
             debug!("New term {:?}", node);
         }
         Ok(node)
@@ -133,12 +134,14 @@ impl<'a> Parser<'a> {
                 let factor = self.parse_factor()?;
                 let factor = Expr::Neg(Box::new(factor));
                 debug!("New factor {:?}", factor);
+                self.expect_binary_operator()?;
                 Ok(factor)
             }
             Token::Int(n) => {
                 self.advance()?;
                 let factor = Expr::Int(n);
                 debug!("New factor {:?}", factor);
+                self.expect_binary_operator()?;
                 Ok(factor)
             }
             Token::LeftParenthesis => {
@@ -159,5 +162,17 @@ impl<'a> Parser<'a> {
         trace!("Advance");
         self.current_token = self.translator.next_token()?;
         Ok(())
+    }
+
+    fn expect_binary_operator(&self) -> Result<()> {
+        match &self.current_token {
+            Token::Plus
+            | Token::Minus
+            | Token::Asterisk
+            | Token::Slash
+            | Token::RightParenthesis
+            | Token::Eof => Ok(()),
+            other => bail!("Expected binary operator, found {:?}", other),
+        }
     }
 }

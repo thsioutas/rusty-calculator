@@ -93,6 +93,14 @@ mod tests {
             "Unexpected token in factor: RightParenthesis",
             format!("{}", err)
         );
+
+        let input = "2 2";
+        let err = calculate(input).unwrap_err();
+        assert_eq!("Expected binary operator, found Int(2)", format!("{}", err));
+
+        let input = "2 * 2 5";
+        let err = calculate(input).unwrap_err();
+        assert_eq!("Expected binary operator, found Int(5)", format!("{}", err));
     }
 
     #[test]
