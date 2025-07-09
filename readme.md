@@ -7,6 +7,13 @@ The calculator supports:
 * Logging with configurable verbosity
 
 ## Usage
+You can run the calculator with optional verbosity control:
+```
+cargo run
+```
+This defaults to info level logging.
+
+To change the verbosity level (options: error, warn, info, debug, trace):
 ```
 cargo run -- --verbosity=debug
 ```

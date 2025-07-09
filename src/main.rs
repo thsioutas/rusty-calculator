@@ -9,8 +9,8 @@ mod token;
 #[derive(ClapParser, Debug)]
 #[clap(author, version, about, long_about = None)]
 struct Args {
-    /// The log verbosity level
-    #[clap(short, long)]
+    /// The log verbosity level (default: info)
+    #[clap(short, long, default_value = "info")]
     pub verbosity: Level,
 }
 
