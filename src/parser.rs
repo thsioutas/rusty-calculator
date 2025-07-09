@@ -144,6 +144,9 @@ impl<'a> Parser<'a> {
             Token::LeftParenthesis => {
                 self.advance()?;
                 let expr = self.parse_expr()?;
+                if self.current_token != Token::RightParenthesis {
+                    bail!("Unmatched parenthesis: expected ')'");
+                }
                 self.advance()?;
                 debug!("New expression (via factor) {:?}", expr);
                 Ok(expr)

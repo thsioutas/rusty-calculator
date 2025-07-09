@@ -96,7 +96,6 @@ mod tests {
     }
 
     #[test]
-    #[ignore]
     fn test_calculate_unmatched_parenthesis() {
         let input = "1+((2*3)+2";
         let _err = calculate(input).unwrap_err();

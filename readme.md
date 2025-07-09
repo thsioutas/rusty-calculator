@@ -67,11 +67,3 @@ This is due to a limitation of 2's complement integer representation in Rust:
 The absolute value of `i64::MIN` (`9223372036854775808`) exceeds the maximum representable i64 value (`i64::MAX` = `9223372036854775807`).
 
 As a result, attempting to parse or evaluate `-9223372036854775808` will lead to an overflow error.
-
-### Unmatched parenthesis
-```
-1+((2*3)+2
-```
-Wrong inputs like the above will lead to unexpected behavior instead of an error like: "Unmatched parenethesis"
-
-A possible solution would be to count the number of left and right parenethesis and return a necessary error when they don't match.
